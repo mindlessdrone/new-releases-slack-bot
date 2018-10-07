@@ -4,7 +4,7 @@
 
 (defn make-slack-poster [url]
   (fn [message]
-    (->> {:text message}
+    (->> message
          (json/write-str)
          (assoc {} :body)
          (client/post url))))

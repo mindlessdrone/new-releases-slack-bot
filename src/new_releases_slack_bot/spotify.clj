@@ -26,4 +26,3 @@
   (->> (get-access-token client secret)
        (spotify/get-a-list-of-new-releases (new-albums-request amount))
        (extract-albums)))
-
