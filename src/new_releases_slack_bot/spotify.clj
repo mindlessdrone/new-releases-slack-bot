@@ -1,6 +1,14 @@
 (ns new-releases-slack-bot.spotify
   (:require [clj-spotify.core :as spotify]
-            [clj-spotify.util :refer [get-access-token]]))
+            [clj-spotify.util :refer [get-access-token]])
+  (:import (java.time LocalDate)))
+
+(defn- current-date []
+  (-> (LocalDate/now)
+      (.toString)))
+
+(defn- filter-by-date [date albums]
+  (filter #(= date (:release_date %)) albums))
 
 (defn- new-albums-request [limit]
   {:country "US"
@@ -20,6 +28,7 @@
   (->> response
       (:albums)
       (:items)
+      (filter-by-date (current-date))
       (map extract-album-information)))
 
 (defn get-new-albums [client secret amount]
