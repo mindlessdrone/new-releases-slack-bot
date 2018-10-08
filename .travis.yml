@@ -3,7 +3,7 @@ deploy:
   provider: lambda
   function_name: PostNewReleaseMessageFunction
   region: us-east-1
-  role: arn:aws:iam::0123456789012:role/lambda_basic_execution
+  role: arn:aws:iam::411928432103:role/lambda_basic_execution
   runtime: java8
   handler_name: com.github.mindlessdrone.NewReleasesBot.handler
   on:
