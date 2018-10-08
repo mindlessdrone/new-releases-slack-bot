@@ -19,8 +19,9 @@ deploy:
   role: arn:aws:iam::411928432103:role/lambda_basic_execution
   runtime: java8
   zip: lambda
-  module_name: com.github.mindlessdrone.NewReleasesBot
-  handler_name: handler
+  module_name: com.github.mindlessdrone
+  handler_name: NewReleasesBot::handler
+  timeout: 10
   on:
     branch: fix-deployment
   secret_access_key:
