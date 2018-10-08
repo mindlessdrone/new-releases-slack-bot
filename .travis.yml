@@ -21,7 +21,7 @@ deploy:
   zip: lambda
   module_name: com.github.mindlessdrone
   handler_name: NewReleasesBot::handler
-  timeout: 10
+  timeout: 30
   memory_size: 512
   on:
     branch: fix-deployment
