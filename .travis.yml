@@ -1,11 +1,13 @@
 language: clojure
 deploy:
   provider: lambda
-  function_name: PostNewReleaseMessageFunction
+  function_name: NewReleasesBotLambda
   region: us-east-1
   role: arn:aws:iam::411928432103:role/lambda_basic_execution
   runtime: java8
-  handler_name: com.github.mindlessdrone.NewReleasesBot.handler
+  zip: target/uberjar/new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
+  module_name: com.github.mindlessdrone.NewReleasesBot
+  handler_name: handler
   on:
     branch: master
   secret_access_key:
