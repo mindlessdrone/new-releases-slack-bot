@@ -10,7 +10,7 @@ before_deploy:
   - jar xf new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
   - rm new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
   - cd ..
-  - ls -la lamba
+  - ls -la lambda
 
 deploy:
   provider: lambda
