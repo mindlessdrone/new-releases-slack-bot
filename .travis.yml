@@ -1,1 +1,12 @@
 language: clojure
+deploy:
+  provider: lambda
+  function_name: PostNewReleaseMessageFunction
+  region: us-east-1
+  role: arn:aws:iam::0123456789012:role/lambda_basic_execution
+  runtime: java8
+  handler_name: com.github.mindlessdrone.NewReleasesBot.handler
+  on:
+    branch: master
+  secret_access_key:
+    secure: ndlR1VaS1ElQ+xbERQqrt1oFuNere4FFe9iDEg33JLYGC2QIdblzHOn6hmSwWdFTnZuKeRdY6/PpNm7fgSNFQ7wg4MpGuGHfBt9tbK4sVufLu0ZNpzXyOTRYCvacFm/doYj4WuO8Ezwux89mBFBKTcpDom5NHIUTS17epJRW0zHbMbVyhQc04BjVMNQnau8N0qlQPCY+QoTRhJqv3LxexVIjGO4Q7tZdqqv4K7pribciftSjlpPHdqeEGY/urX4fuVtHVFW5BEIh3nHe/WO6rf4ObN2HAtNmHnaLQv42dpfKhoENF3L0wDGTIYS/y03k7N2U/Y6O0s2U/4jd4CNCLVe7+IBBCGnwEVhqg6f4txuFrqmO9/1K7klUL59wfD9ZpmXRInNYgP4HyDwqhLfEHZ/YEzYWSaz9p78oOY9m4y/mYp545AfRod5AIiOLkgRPE0hZS0IJPyKxq9In0hBlgcpXa1IemIrc24kdligH9VLFLjc3cX/L0fsVa3qnDB9EWvc0kAGHehxHpJuF8HdHV+7YRYKjVjReZri7XO5JNtm2YlPfS5hxM+7nADwV3/2dEolmI8yjKbckzqUmPc/l4NS5vYJDAk1eKZsnwdNlWFlfKSIs+9y6Vb9ZHDoAMFAOeSvI3tqcx1Js+JC+3gOK83LrB4bbMbjN41HHSdgS/DQ=
