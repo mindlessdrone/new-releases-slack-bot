@@ -3,22 +3,13 @@ language: clojure
 script:
   - lein uberjar
 
-before_deploy:
-  - mkdir lambda
-  - mv target/uberjar/new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar lambda
-  - cd lambda
-  - jar xf new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
-  - rm new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
-  - cd ..
-  - ls -la lambda
-
 deploy:
   provider: lambda
   function_name: NewReleasesBotLambda
   region: us-east-1
   role: arn:aws:iam::411928432103:role/lambda_basic_execution
   runtime: java8
-  zip: lambda
+  zip: target/uberjar/new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
   module_name: com.github.mindlessdrone
   handler_name: NewReleasesBot::handler
   timeout: 30
