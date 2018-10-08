@@ -1,15 +1,28 @@
 language: clojure
+
+script:
+  - lein uberjar
+
+before_deploy:
+  - mkdir lambda
+  - mv target/uberjar/new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar lambda
+  - cd lambda
+  - jar xf new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
+  - rm new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
+  - cd ..
+  - ls -la lamba
+
 deploy:
   provider: lambda
   function_name: NewReleasesBotLambda
   region: us-east-1
   role: arn:aws:iam::411928432103:role/lambda_basic_execution
   runtime: java8
-  zip: target/uberjar/new-releases-slack-bot-0.1.0-SNAPSHOT-standalone.jar
+  zip: lambda
   module_name: com.github.mindlessdrone.NewReleasesBot
   handler_name: handler
   on:
-    branch: master
+    branch: fix-deployment
   secret_access_key:
     secure: j2Kkm1VgmKy0/sRcR+sok6n/YkEGaVd08dVr+Y3fqb0fl/CEVynW1FulTkuAvbfH/eqbdarw59hLD6Cq2kwr/64WJmlwU1O/+N7yAVq5zz0kBc5MIju9R6KZGU8qhrDk58TJDVvwQLqiXVPlLuzynXA32wHmgwSxrpJ9avHvCNOtRNP6TDcqY0xDPdPJpg7JrSTJZnMnRFz0yUs4YoJvYWu5J1kIIxgEAzDndCUqtzjEBV8m2n3EdggLaCra+k9LuTLiISSf6oD9yh+B3owWzcIzV5xoCRZ7anpbpx6AC4PQjAeZbeCHxGCgHqdvAjiWGrRj1Px6YTEQ8LjQI3jb0eAxj46MgEuYstWwTXrbmI77gAQTF1eH8MGkpxIjNr964BUA2waVHtI5DTtM3/OQYLs1cvg60Ov+zmRAW0Xx87rPH5bJhaRrCGFpUzvHcBM0m8jbCTSy2oW2az7HPQ21gLv6xmkLCgjydP5gM+FWK0lUUcKK4SH1ppO0MgYndnO7ZJE3UXlCM+iQu2kQhH7ttRA544IGF0jhRCvqn51GS9gbaTuA2a44f2RsuNLuegsEWhxfC4ygvCqq9MQxtxqe6wO4tPMSJ8nGK0uz0y1a3ukCM7mw9gAYiqGamU8gGgcHZFoinMb789mqH1GSagmNAUo9++UQz76cJzAUkVp54Do=
   access_key_id:
