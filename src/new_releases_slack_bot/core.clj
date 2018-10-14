@@ -2,15 +2,21 @@
   (:gen-class
     :name "com.github.mindlessdrone.NewReleasesBot"
     :methods [^:static [handler [] String]])
+  (:import (java.time LocalDate))
   (:require [clojure.string :as string]
             [new-releases-slack-bot.slack :as slack]
             [new-releases-slack-bot.spotify :refer [get-new-albums]]))
+
+(defn- current-date []
+  (-> (LocalDate/now)
+      (.toString)))
 
 (defn- new-album-releases-message [albums]
   {:text "Hello! Here are the new releases for today"
    :attachments (for [album albums]
                   {:title (:name album)
-                   :text (string/join ", " (:artists album))
+                   :title_link (:link album)
+                   :text (string/join ", " (map :name (:artists album)))
                    :thumb_url (:image album)})})
 
 (defn- send-new-releases-message []
@@ -18,7 +24,7 @@
         secret (System/getenv "CLIENT_SECRET")
         slack-webhook (System/getenv "SLACK_WEBHOOK_URI")
         post-to-slack (slack/make-slack-poster slack-webhook)
-        albums (get-new-albums client secret 20)]
+        albums (get-new-albums client secret 20 (current-date))]
     (when (not-empty albums)
       (-> albums
           (new-album-releases-message)
