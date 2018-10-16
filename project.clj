@@ -7,6 +7,7 @@
                  [org.clojure/data.json "0.2.6"]
                  [clj-http "3.9.1"]
                  [clj-spotify "0.1.7"]
+                 [clj-slack-client "0.1.6-SNAPSHOT"]
                  [com.amazonaws/aws-lambda-java-core  "1.2.0"]]
   :main ^:skip-aot new-releases-slack-bot.core
   :target-path "target/%s"
