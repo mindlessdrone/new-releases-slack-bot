@@ -1,4 +1,4 @@
-(ns new-releases-slack-bot.spotify
+(ns scheduled-message-lambda.spotify
   (:require [clj-spotify.core :as spotify]
             [clj-spotify.util :refer [get-access-token]]))
 

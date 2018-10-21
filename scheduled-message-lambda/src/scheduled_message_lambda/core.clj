@@ -1,11 +1,11 @@
-(ns new-releases-slack-bot.core
+(ns scheduled-message-lambda.core
   (:gen-class
     :name "com.github.mindlessdrone.NewReleasesBot"
     :methods [^:static [handler [] String]])
   (:import (java.time LocalDate))
   (:require [clojure.string :as string]
-            [new-releases-slack-bot.slack :as slack]
-            [new-releases-slack-bot.spotify :refer [get-new-albums]]))
+            [scheduled-message-lambda.slack :as slack]
+            [scheduled-message-lambda.spotify :refer [get-new-albums]]))
 
 (defn- current-date []
   (-> (LocalDate/now)

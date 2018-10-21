@@ -1,4 +1,4 @@
-(ns new-releases-slack-bot.slack
+(ns scheduled-message-lambda.slack
   (:require [clj-http.client :as client]
             [clojure.data.json :as json]))
 
