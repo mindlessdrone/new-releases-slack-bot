@@ -9,7 +9,7 @@ script:
 deploy:
   provider: script
   skip_cleanup: true
-  script: sam deploy --template-file packaged.yaml --stack-name new-releases-slack-bot
+  script: sam deploy --template-file packaged.yaml --stack-name new-releases-slack-bot --capabilities CAPABILITY_IAM
   on:
     branch: switch-to-sub-modules
 env:
