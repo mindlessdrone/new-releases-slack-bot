@@ -6,14 +6,12 @@
 
 (defn- get-challenge [event]
   (-> event
-      (get "body")
       (get "challenge")))
 
 (defn -handler [event-data]
-  (println event-data)
   (let [event (json/read-str (get event-data "body"))
         challenge (get-challenge event)]
     (if challenge
       {"body" challenge}
-      ("body" "ok"))))
+      {"body" "ok"})))
 
