@@ -10,3 +10,17 @@ Resources:
       CodeUri: .//scheduled-message-lambda//target//uberjar//scheduled-message-lambda-0.1.0-SNAPSHOT-standalone.jar
       Handler: com.github.mindlessdrone.NewReleasesBot::handler
       MemorySize: 512
+  NewReleasesBotSlackEvents:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: SlackEventsLambda
+      Runtime: java8
+      Timeout: 30
+      CodeUri: .//slack-events-lambda//target//uberjar//slack-events-lambda-0.1.0-SNAPSHOT-standalone.jar
+      Handler: NewReleasesBot.EventHandler::handler
+      Events:
+        EventResource:
+          Type: Api
+          Properties:
+            Path: /events
+            Method: post

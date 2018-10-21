@@ -11,7 +11,7 @@ deploy:
   skip_cleanup: true
   script: sam deploy --template-file packaged.yaml --stack-name new-releases-slack-bot --capabilities CAPABILITY_IAM
   on:
-    branch: master
+    branch: switch-to-event-architecture
 env:
   global:
   - AWS_DEFAULT_REGION=us-east-1
