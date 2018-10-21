@@ -8,7 +8,7 @@ script:
 - sam package --template-file template.yaml --s3-bucket new-releases-bot-bucket --output-template-file packaged.yaml
 deploy:
   provider: script
-  script: sam deploy --template-file packaged.yaml --stack-name new-releases-slack-bot
+  script: sam deploy --template-file /home/travis/build/mindlessdrone/new-releases-slack-bot/packaged.yaml --stack-name new-releases-slack-bot
   on:
     branch: switch-to-sub-modules
 env:
