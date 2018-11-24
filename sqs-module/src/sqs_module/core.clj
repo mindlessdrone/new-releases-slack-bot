@@ -9,6 +9,6 @@
 (defn get-queue-url [sqs queue-name]
   (.getQueueUrl sqs (GetQueueUrlRequest. queue-name)))
 
-(defn send-message-to-sqs [sqs message]
-  (let [message-request (SendMessageRequest. (get-queue-url sqs) message)]
+(defn send-message-to-sqs [sqs queue-name message]
+  (let [message-request (SendMessageRequest. (get-queue-url sqs queue-name) message)]
     (.sendMessage sqs message-request)))
